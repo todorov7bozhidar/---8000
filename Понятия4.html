@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подготовка за Национална олимпиада по история</title>
+<title>Азбучен показалец на понятията</title>
 <style>
     body {
         margin: 0;
@@ -22,207 +22,636 @@
         letter-spacing: 1px;
     }
 
-    #container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 20px;
-        background-color: #3a3a3a;
-        border-radius: 15px;
+    #search-container {
+        text-align: center;
+        margin: 20px;
     }
 
-    #concept-display {
-        background-color: #330000;
-        padding: 20px;
-        border-radius: 10px;
-        font-size: 18px;
-        margin-bottom: 20px;
-        min-height: 80px;
-    }
-
-    input[type="text"] {
-        width: 80%;
-        padding: 10px;
+    #search-input {
+        width: 300px;
+        padding: 8px;
         font-size: 16px;
         border-radius: 5px;
         border: none;
         outline: none;
-        margin-bottom: 10px;
     }
 
-    button {
-        padding: 10px 20px;
+    #search-container button {
+        padding: 8px 15px;
         font-size: 16px;
         border-radius: 5px;
         border: none;
         background-color: #b30000;
         color: white;
         cursor: pointer;
-        transition: background-color 0.3s;
         margin-left: 5px;
+        transition: background-color 0.3s;
     }
 
-    button:hover {
+    #search-container button:hover {
         background-color: #ff0000;
     }
 
-    #feedback {
+    #search-result {
+        text-align: center;
+        margin: 15px;
         font-size: 18px;
-        margin-top: 15px;
-        min-height: 25px;
+        color: #ffcccc;
     }
 
-    #scoreboard {
-        margin-top: 20px;
-        font-size: 16px;
-        color: #cccccc;
+    #index-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: #3a3a3a;
+        padding: 10px 0;
+        margin: 0;
     }
+
+    #index-container span {
+        margin: 5px 10px;
+        cursor: pointer;
+        color: #cccccc;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+
+    #index-container span:hover {
+        color: #ffffff;
+    }
+
+    .entry {
+        background-color: #330000;
+        margin: 10px auto;
+        padding: 15px;
+        border-radius: 10px;
+        max-width: 800px;
+        color: #ffffff;
+        line-height: 1.5;
+        font-size: 18px;
+    }
+
+    .term {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: #ff9999;
+    }
+
+    .definition {
+        color: #ffd9d9;
+    }
+
 </style>
 </head>
 <body>
 
-<h1>Подготовка за Национална олимпиада по история</h1>
+<h1>Азбучен показалец на понятията</h1>
 
-<div id="container">
-    <div id="concept-display">Натиснете „Лауреат“, за да започнете!</div>
-    <input type="text" id="answer-input" placeholder="Напишете понятието тук">
-    <button onclick="checkAnswer()">Провери</button>
-    <button onclick="newConcept()">Лауреат</button>
-    <div id="feedback"></div>
-    <div id="scoreboard">Верни: 0 | Грешни: 0</div>
+<!-- Търсачка -->
+<div id="search-container">
+    <input type="text" id="search-input" placeholder="Въведете понятие...">
+    <button onclick="searchTerm()">Търси</button>
 </div>
 
+<div id="search-result"></div>
+
+<!-- Азбучен индекс -->
+<div id="index-container">
+    <span onclick="scrollToLetter('А')">А</span>
+    <span onclick="scrollToLetter('Б')">Б</span>
+    <span onclick="scrollToLetter('В')">В</span>
+    <span onclick="scrollToLetter('Г')">Г</span>
+    <span onclick="scrollToLetter('Д')">Д</span>
+    <span onclick="scrollToLetter('Е')">Е</span>
+    <span onclick="scrollToLetter('Ж')">Ж</span>
+    <span onclick="scrollToLetter('З')">З</span>
+    <span onclick="scrollToLetter('И')">И</span>
+    <span onclick="scrollToLetter('К')">К</span>
+    <span onclick="scrollToLetter('Л')">Л</span>
+    <span onclick="scrollToLetter('М')">М</span>
+    <span onclick="scrollToLetter('Н')">Н</span>
+    <span onclick="scrollToLetter('О')">О</span>
+    <span onclick="scrollToLetter('П')">П</span>
+    <span onclick="scrollToLetter('Р')">Р</span>
+    <span onclick="scrollToLetter('С')">С</span>
+    <span onclick="scrollToLetter('Т')">Т</span>
+    <span onclick="scrollToLetter('Ф')">Ф</span>
+    <span onclick="scrollToLetter('Ц')">Ц</span>
+    <span onclick="scrollToLetter('Ч')">Ч</span>
+    <span onclick="scrollToLetter('Ш')">Ш</span>
+</div>
+
+<!-- Понятия -->
+<div id="concepts-container">
+    <!-- Тук са твоите <div class="entry"> понятия -->
+    <!-- (оставям ги без промени, както си ги включил) -->
+    <div class="entry">
+    <div class="term">абдикация</div>
+    <div class="definition">отказване на владетел от престола</div>
+</div>
+
+<div class="entry">
+    <div class="term">автономия</div>
+    <div class="definition">самоуправление на област в дадена държава</div>
+</div>
+
+<div class="entry">
+    <div class="term">авторитарна власт</div>
+    <div class="definition">власт, която премахва повечето граждански права и свободи, без да подчинява изцяло обществото и без да го променя</div>
+</div>
+
+<div class="entry">
+    <div class="term">аграрна реформа</div>
+    <div class="definition">със закон се определя максималният размер земя, който може да се притежава и обработва, а останалата земя се раздава на безимотните селяни</div>
+</div>
+
+<div class="entry">
+    <div class="term">артинсталация</div>
+    <div class="definition">пространствена композиция със специфично послание</div>
+</div>
+
+<div class="entry">
+    <div class="term">башибозук</div>
+    <div class="definition">нередовна войска от мюсюлмани, използвана за потушаване на въстания чрез грабежи и жестокости</div>
+</div>
+
+<div class="entry">
+    <div class="term">бежанци</div>
+    <div class="definition">хора, принудени да напуснат родните си места и да търсят убежище и закрила в друга държава</div>
+</div>
+
+<div class="entry">
+    <div class="term">български национален въпрос</div>
+    <div class="definition">стремеж за обединяване на всички българи в една държава; възниква с разпокъсването на българските земи от Берлинския договор през 1878 г.</div>
+</div>
+
+<div class="entry">
+    <div class="term">Българско възраждане</div>
+    <div class="definition">епоха (XVIII - XIX в.), в която българите осъществяват преход от Средновековието към Новото време</div>
+</div>
+
+<div class="entry">
+    <div class="term">велики сили</div>
+    <div class="definition">големите и силни европейски държави през XIX в.: Англия, Франция, Русия, Германия, Австрия, Италия</div>
+</div>
+
+<div class="entry">
+    <div class="term">Взаимен метод</div>
+    <div class="definition">учителят е подпомаган от по-напредналите ученици в своята работа. Методът бил приложен за пръв път от английските педагози Бел и Ланкастър (XVIII в.)</div>
+</div>
+
+<div class="entry">
+    <div class="term">граждански права</div>
+    <div class="definition">правата, гарантирани от конституцията и законите за всички граждани</div>
+</div>
+
+<div class="entry">
+    <div class="term">гражданско общество</div>
+    <div class="definition">в него на преден план стои самоорганизацията на гражданите в независими от държавната власт организации</div>
+</div>
+
+<div class="entry">
+    <div class="term">графити</div>
+    <div class="definition">рисунки и надписи на публични места</div>
+</div>
+
+<div class="entry">
+    <div class="term">депортиране</div>
+    <div class="definition">принудително изгонване на хора от постоянното им местожителство</div>
+</div>
+
+<!-- Тук можеш да продължиш по същия начин за всички останали понятия -->
+<div class="entry">
+    <div class="term">държавен монопол</div>
+    <div class="definition">неограничено право на държавата да произвежда и търгува с определени стоки</div>
+</div>
+
+<div class="entry">
+    <div class="term">държавни институции</div>
+    <div class="definition">учреждения, чрез които държавата изпълнява своята дейност</div>
+</div>
+
+<div class="entry">
+    <div class="term">Европейска комисия</div>
+    <div class="definition">орган на изпълнителната власт на ЕС</div>
+</div>
+
+<div class="entry">
+    <div class="term">Европейски концерт на великите сили</div>
+    <div class="definition">наименованието на договореностите между великите сили през XIX в.</div>
+</div>
+
+<div class="entry">
+    <div class="term">Европейски съвет</div>
+    <div class="definition">състои се от ръководителите на правителствата на страните членки на ЕС</div>
+</div>
+
+<div class="entry">
+    <div class="term">Европейски съюз</div>
+    <div class="definition">политическо и икономическо обединение на държавите от Западна Европа след Втората световна война; разширява се на изток след края на студената война</div>
+</div>
+
+<div class="entry">
+    <div class="term">европейски ценности</div>
+    <div class="definition">общоприети в Европа ценности, които включват гарантирането на траен мир, единство, равенство, свобода, сигурност и солидарност</div>
+</div>
+
+<div class="entry">
+    <div class="term">Екзархия</div>
+    <div class="definition">независима национална православна църква, начело на която стои екзарх</div>
+</div>
+
+<div class="entry">
+    <div class="term">етническа общност</div>
+    <div class="definition">голяма група хора, които имат общ език, културни особености, обичаи и традиции</div>
+</div>
+
+<div class="entry">
+    <div class="term">законодателна власт</div>
+    <div class="definition">държавните институции, които приемат, изменят, допълват и отменят законите</div>
+</div>
+
+<div class="entry">
+    <div class="term">изпълнителна власт</div>
+    <div class="definition">държавните институции, които упражняват власт съобразно законите</div>
+</div>
+
+<div class="entry">
+    <div class="term">Източен блок</div>
+    <div class="definition">съюз между СССР и европейските социалистически страни</div>
+</div>
+
+<div class="entry">
+    <div class="term">Източен въпрос</div>
+    <div class="definition">противоречията между европейските велики сили, свързани с разпадането на Османската империя в периода 1699–1919 г.</div>
+</div>
+
+<div class="entry">
+    <div class="term">Източна криза</div>
+    <div class="definition">поредица от събития в периода 1875–1878 г., свързани с борбите на балканските народи за свобода и опитите на великите сили за разрешаване на Източния въпрос</div>
+</div>
+
+<div class="entry">
+    <div class="term">индустриализация</div>
+    <div class="definition">изграждане на промишлени предприятия</div>
+</div>
+
+<div class="entry">
+    <div class="term">институция</div>
+    <div class="definition">учреждение</div>
+</div>
+
+<div class="entry">
+    <div class="term">интелигенция</div>
+    <div class="definition">хора, които се занимават с умствен, творчески труд</div>
+</div>
+
+<div class="entry">
+    <div class="term">кантора</div>
+    <div class="definition">място, от което се ръководи търговската дейност</div>
+</div>
+
+<div class="entry">
+    <div class="term">капитулация</div>
+    <div class="definition">признаване на поражение и приемане на условията на победителите</div>
+</div>
+
+<div class="entry">
+    <div class="term">Коминформбюро</div>
+    <div class="definition">информационно бюро на комунистически партии, просъществувало от 1947 до 1956 г.</div>
+</div>
+
+<div class="entry">
+    <div class="term">комите</div>
+    <div class="definition">организация от хора, които споделят общи идеи и работят за тях</div>
+</div>
+
+<div class="entry">
+    <div class="term">комунисти</div>
+    <div class="definition">последователи на Българската комунистическа партия (БКП), участващи в организацията на комунистическите партии</div>
+</div>
+
+<div class="entry">
+    <div class="term">комунистически режим</div>
+    <div class="definition">управление на Комунистическата партия, насочено към осъществяване на нейните идеи, без да се зачитат човешките права и свободи</div>
+</div>
+
+<div class="entry">
+    <div class="term">конак</div>
+    <div class="definition">административна сграда, в която живее и работи турският управител на областта</div>
+</div>
+
+<div class="entry">
+    <div class="term">конституция</div>
+    <div class="definition">основният закон на държавата</div>
+</div>
+
+<div class="entry">
+    <div class="term">кооперация</div>
+    <div class="definition">доброволно сдружение на хора за колективно производство в селското стопанство, строителството, търговията и др.</div>
+</div>
+
+<div class="entry">
+    <div class="term">култ към личността</div>
+    <div class="definition">възвеличаване на партиен лидер чрез средствата за масова информация и художествените произведения, създаващи образ на непогрешим и несменяем водач</div>
+</div>
+
+<div class="entry">
+    <div class="term">лингвист</div>
+    <div class="definition">учен, който изучава езика</div>
+</div>
+
+<div class="entry">
+    <div class="term">манифест</div>
+    <div class="definition">тържествено писмено обръщение към населението</div>
+</div>
+
+<div class="entry">
+    <div class="term">миграция</div>
+    <div class="definition">преместване на големи групи хора с цел смяна на местоживеене</div>
+</div>
+
+<div class="entry">
+    <div class="term">Министерски съвет</div>
+    <div class="definition">правителството на една държава</div>
+</div>
+
+<div class="entry">
+    <div class="term">Младотурска революция</div>
+    <div class="definition">преврат на военни и политици, целящ модернизирането на Османската империя чрез ограничаване на султанската власт и възстановяване на конституцията от 1876 г.</div>
+</div>
+
+<div class="entry">
+    <div class="term">модернизация</div>
+    <div class="definition">промените през Новото време в стопанството, начина на мислене, държавното управление, образованието и всекидневието</div>
+</div>
+
+<div class="entry">
+    <div class="term">Наместничество</div>
+    <div class="definition">временен колективен орган, който управлява, докато князът е извън страната</div>
+</div>
+
+<div class="entry">
+    <div class="term">Народно събрание</div>
+    <div class="definition">институция, която приема законите (парламент)</div>
+</div>
+
+<div class="entry">
+    <div class="term">НАТО</div>
+    <div class="definition">организация за военно сътрудничество и отбрана на западните държави</div>
+</div>
+
+<div class="entry">
+    <div class="term">изземване на имущество</div>
+    <div class="definition">национализация в полза на държавата</div>
+</div>
+
+<div class="entry">
+    <div class="term">национална катастрофа</div>
+    <div class="definition">тежките последици от поражението във войните за национално обединение</div>
+</div>
+
+<div class="entry">
+    <div class="term">национална революция</div>
+    <div class="definition">въоръжена борба за постигане на национална независимост</div>
+</div>
+
+<div class="entry">
+    <div class="term">нация</div>
+    <div class="definition">голяма група хора, свързани с общо минало, език, култура и чувство за принадлежност към общността</div>
+</div>
+
+<div class="entry">
+    <div class="term">неутралитет</div>
+    <div class="definition">политика на ненамеса във военни конфликти</div>
+</div>
+
+<div class="entry">
+    <div class="term">Ново време</div>
+    <div class="definition">периодът от XVI до XX в., в който се появяват машинното производство, масовото образование и модерното държавно управление с участието на гражданите</div>
+</div>
+
+<div class="entry">
+    <div class="term">опозиция</div>
+    <div class="definition">политически партии и организации, които се противопоставят на управляващите</div>
+</div>
+
+<div class="entry">
+    <div class="term">пазарна икономика</div>
+    <div class="definition">при нея разпределянето на стоките и услугите става чрез пазара без пряката намеса на държавата</div>
+</div>
+
+<div class="entry">
+    <div class="term">пазарни принципи</div>
+    <div class="definition">икономически принципи, при които търсенето и предлагането на пазара определят цените на стоките</div>
+</div>
+
+<div class="entry">
+    <div class="term">парламентарни избори</div>
+    <div class="definition">избори за законодателна власт (Народно събрание)</div>
+</div>
+
+<div class="entry">
+    <div class="term">партизани</div>
+    <div class="definition">участници във въоръжената съпротива срещу българските власти, организирана от БКП (1941–1944 г.)</div>
+</div>
+
+<div class="entry">
+    <div class="term">партизанщина</div>
+    <div class="definition">така в края на XIX в. наричат желанието на политическите партии да се обогатяват от властта</div>
+</div>
+
+<div class="entry">
+    <div class="term">перестройка</div>
+    <div class="definition">от руски език; реформите на Михаил Горбачов, целящи укрепване на СССР</div>
+</div>
+
+<div class="entry">
+    <div class="term">политическа партия</div>
+    <div class="definition">организация на хора с общи интереси, цели и идеи за управлението на държавата</div>
+</div>
+
+<div class="entry">
+    <div class="term">политическа система</div>
+    <div class="definition">съвкупност от държавни органи, партии и организации, политически идеи и отношения, при които протича политическият живот на обществото</div>
+</div>
+
+<div class="entry">
+    <div class="term">политически плурализъм</div>
+    <div class="definition">възможност за съществуване на политически партии и организации с различни идеи и възгледи</div>
+</div>
+
+<div class="entry">
+    <div class="term">популизъм</div>
+    <div class="definition">дейност, която цели да осигури популярност с цената на необосновани обещания и лозунги</div>
+</div>
+
+<div class="entry">
+    <div class="term">преврат</div>
+    <div class="definition">насилствена промяна на държавното управление</div>
+</div>
+
+<div class="entry">
+    <div class="term">предприемач</div>
+    <div class="definition">човек, който поема нови инициативи, влага средства и извършва стопанска дейност с цел печалба</div>
+</div>
+
+<div class="entry">
+    <div class="term">примирие</div>
+    <div class="definition">временно спиране на военните действия между участниците във военен конфликт</div>
+</div>
+
+<div class="entry">
+    <div class="term">пропаганда</div>
+    <div class="definition">разпространяване и разясняване на идеи с цел спечелване на обществена подкрепа</div>
+</div>
+
+<div class="entry">
+    <div class="term">протекционизъм</div>
+    <div class="definition">политика за защита и насърчаване на родното производство</div>
+</div>
+
+<div class="entry">
+    <div class="term">ревизия</div>
+    <div class="definition">преразглеждане, промяна на договор по мирен път</div>
+</div>
+
+<div class="entry">
+    <div class="term">Регентство</div>
+    <div class="definition">колективен орган, който замества владетеля при смърт, непълнолетие или невъзможност да изпълнява задълженията си</div>
+</div>
+
+<div class="entry">
+    <div class="term">репресии</div>
+    <div class="definition">насилствени действия срещу политически противници за наказване, сплашване или физическо ликвидиране</div>
+</div>
+
+<div class="entry">
+    <div class="term">референдум</div>
+    <div class="definition">допитване до населението по важен въпрос</div>
+</div>
+
+<div class="entry">
+    <div class="term">реформа</div>
+    <div class="definition">промяна, свързана с въвеждането на нещо ново или по-добро</div>
+</div>
+
+<div class="entry">
+    <div class="term">русофили</div>
+    <div class="definition">привърженици на руската политика спрямо България</div>
+</div>
+
+<div class="entry">
+    <div class="term">русофоби</div>
+    <div class="definition">противници на руската намеса в българското развитие</div>
+</div>
+
+<div class="entry">
+    <div class="term">светско образование</div>
+    <div class="definition">образование, което няма религиозен характер и не се контролира от Църквата</div>
+</div>
+
+<div class="entry">
+    <div class="term">семинария</div>
+    <div class="definition">училище за подготовка на свещеници</div>
+</div>
+
+<div class="entry">
+    <div class="term">символизъм</div>
+    <div class="definition">направление в европейската и руската литература и изкуство от края на XIX и началото на ХХ в.; насочва вниманието към индивидуалните човешки преживявания, към поезията сама за себе си</div>
+</div>
+
+<div class="entry">
+    <div class="term">сръбска пропаганда</div>
+    <div class="definition">стремежът на Сърбия да наложи своя език, образование и църкви в Македония</div>
+</div>
+
+<div class="entry">
+    <div class="term">Съвет на Европа</div>
+    <div class="definition">международна организация на държавите от Европа</div>
+</div>
+
+<div class="entry">
+    <div class="term">съдебна власт</div>
+    <div class="definition">система от съдилища, които налагат справедливост и осигуряват решаване на спорове</div>
+</div>
+
+<div class="entry">
+    <div class="term">съсловна теория</div>
+    <div class="definition">според нея обществото се дели на съсловия (зemedелско, занаятчийско, работническо, търговско и др.); на земедеделското съсловие, което е най-многобройно, е отредено да играе първостепенна роля в обществото</div>
+</div>
+
+<div class="entry">
+    <div class="term">тоталитарно управление</div>
+    <div class="definition">управление на една партия, която налага волята си на цялото общество: подчинява държавните органи, нарушава човешките права, поставя под контрол всички дейности, използва насилие и създава култ към партийния лидер</div>
+</div>
+
+<div class="entry">
+    <div class="term">трудовокооперативни земеделски стопанства (ТКЗС)</div>
+    <div class="definition">обединяване на земите на селяните с цел механизирано обработване и повишаване на добивите</div>
+</div>
+
+<div class="entry">
+    <div class="term">федерация</div>
+    <div class="definition">държава, която обединява няколко самостоятелни държави</div>
+</div>
+
+<div class="entry">
+    <div class="term">ферман</div>
+    <div class="definition">писмена султанска заповед със силата на закон</div>
+</div>
+
+<div class="entry">
+    <div class="term">цензура</div>
+    <div class="definition">контрол върху печата, книгите, радио и телевизионните предавания</div>
+</div>
+
+<div class="entry">
+    <div class="term">читалище</div>
+    <div class="definition">българска институция, която разпространява знания и култура през Възраждането</div>
+</div>
+
+<div class="entry">
+    <div class="term">чорбаджии</div>
+    <div class="definition">богати българи, които имат авторитет пред османските власти и влияние сред сънародниците си</div>
+</div>
+</div>
+
+<!-- 🔹 Скрипт за търсене и навигация -->
 <script>
-const concepts = [
-    {term: "абдикация", definition: "отказване на владетел от престола"},
-    {term: "автономия", definition: "самоуправление на област в дадена държава"},
-    {term: "авторитарна власт", definition: "власт, която премахва повечето граждански права и свободи, без да подчинява изцяло обществото и без да го променя"},
-    {term: "аграрна реформа", definition: "със закон се определя максималният размер земя, който може да се притежава и обработва, а останалата земя се раздава на безимотните селяни"},
-    {term: "артинсталация", definition: "пространствена композиция със специфично послание"},
-    {term: "башибозук", definition: "нередовна войска от мюсюлмани, използвана за потушаване на въстания чрез грабежи и жестокости"},
-    {term: "бежанци", definition: "хора, принудени да напуснат родните си места и да търсят убежище и закрила в друга държава"},
-    {term: "български национален въпрос", definition: "стремеж за обединяване на всички българи в една държава; възниква с разпокъсването на българските земи от Берлинския договор през 1878 г."},
-    {term: "Българско възраждане", definition: "епоха (XVIII - XIX в.), в която българите осъществяват преход от Средновековието към Новото време"},
-    {term: "велики сили", definition: "големите и силни европейски държави през XIX в.: Англия, Франция, Русия, Германия, Австрия, Италия"},
-    {term: "Взаимен метод", definition: "учителят е подпомаган от по-напредналите ученици в своята работа. Методът бил приложен за пръв път от английските педагози Бел и Ланкастър (XVIII в.)"},
-    {term: "граждански права", definition: "правата, гарантирани от конституцията и законите за всички граждани"},
-    {term: "гражданско общество", definition: "в него на преден план стои самоорганизацията на гражданите в независими от държавната власт организации"},
-    {term: "графити", definition: "рисунки и надписи на публични места"},
-    {term: "депортиране", definition: "принудително изгонване на хора от постоянното им местожителство"},
-    {term: "държавен монопол", definition: "неограничено право на държавата да произвежда и търгува с определени стоки"},
-    {term: "държавни институции", definition: "учреждения, чрез които държавата изпълнява своята дейност"},
-    {term: "Европейска комисия", definition: "орган на изпълнителната власт на ЕС"},
-    {term: "Европейски концерт на великите сили", definition: "наименованието на договореностите между великите сили през XIX в."},
-    {term: "Европейски съвет", definition: "състои се от ръководителите на правителствата на страните членки на ЕС"},
-    {term: "Европейски съюз", definition: "политическо и икономическо обединение на държавите от Западна Европа след Втората световна война; разширява се на изток след края на студената война"},
-    {term: "европейски ценности", definition: "общоприети в Европа ценности, които включват гарантирането на траен мир, единство, равенство, свобода, сигурност и солидарност"},
-    {term: "Екзархия", definition: "независима национална православна църква, начело на която стои екзарх"},
-    {term: "етническа общност", definition: "голяма група хора, които имат общ език, културни особености, обичаи и традиции"},
-    {term: "законодателна власт", definition: "държавните институции, които приемат, изменят, допълват и отменят законите"},
-    {term: "изпълнителна власт", definition: "държавните институции, които упражняват власт съобразно законите"},
-    {term: "Източен блок", definition: "съюз между СССР и европейските социалистически страни"},
-    {term: "Източен въпрос", definition: "противоречията между европейските велики сили, свързани с разпадането на Османската империя в периода 1699–1919 г."},
-    {term: "Източна криза", definition: "поредица от събития в периода 1875–1878 г., свързани с борбите на балканските народи за свобода и опитите на великите сили за разрешаване на Източния въпрос"},
-    {term: "индустриализация", definition: "изграждане на промишлени предприятия"},
-    {term: "институция", definition: "учреждение"},
-    {term: "интелигенция", definition: "хора, които се занимават с умствен, творчески труд"},
-    {term: "кантора", definition: "място, от което се ръководи търговската дейност"},
-    {term: "капитулация", definition: "признаване на поражение и приемане на условията на победителите"},
-    {term: "Коминформбюро", definition: "информационно бюро на комунистически партии, просъществувало от 1947 до 1956 г."},
-    {term: "комите", definition: "организация от хора, които споделят общи идеи и работят за тях"},
-    {term: "комунисти", definition: "последователи на Българската комунистическа партия (БКП), участващи в организацията на комунистическите партии"},
-    {term: "комунистически режим", definition: "управление на Комунистическата партия, насочено към осъществяване на нейните идеи, без да се зачитат човешките права и свободи"},
-    {term: "конак", definition: "административна сграда, в която живее и работи турският управител на областта"},
-    {term: "конституция", definition: "основният закон на държавата"},
-    {term: "кооперация", definition: "доброволно сдружение на хора за колективно производство в селското стопанство, строителството, търговията и др."},
-    {term: "култ към личността", definition: "възвеличаване на партиен лидер чрез средствата за масова информация и художествените произведения, създаващи образ на непогрешим и несменяем водач"},
-    {term: "лингвист", definition: "учен, който изучава езика"},
-    {term: "манифест", definition: "тържествено писмено обръщение към населението"},
-    {term: "миграция", definition: "преместване на големи групи хора с цел смяна на местоживеене"},
-    {term: "Министерски съвет", definition: "правителството на една държава"},
-    {term: "Младотурска революция", definition: "преврат на военни и политици, целящ модернизирането на Османската империя чрез ограничаване на султанската власт и възстановяване на конституцията от 1876 г."},
-    {term: "модернизация", definition: "промените през Новото време в стопанството, начина на мислене, държавното управление, образованието и всекидневието"},
-    {term: "Наместничество", definition: "временен колективен орган, който управлява, докато князът е извън страната"},
-    {term: "Народно събрание", definition: "институция, която приема законите (парламент)"},
-    {term: "НАТО", definition: "организация за военно сътрудничество и отбрана на западните държави"},
-    {term: "изземване на имущество", definition: "национализация в полза на държавата"},
-    {term: "национална катастрофа", definition: "тежките последици от поражението във войните за национално обединение"},
-    {term: "национална революция", definition: "въоръжена борба за постигане на национална независимост"},
-    {term: "нация", definition: "голяма група хора, свързани с общо минало, език, култура и чувство за принадлежност към общността"},
-    {term: "неутралитет", definition: "политика на ненамеса във военни конфликти"},
-    {term: "Ново време", definition: "периодът от XVI до XX в., в който се появяват машинното производство, масовото образование и модерното държавно управление с участието на гражданите"},
-    {term: "опозиция", definition: "политически партии и организации, които се противопоставят на управляващите"},
-    {term: "пазарна икономика", definition: "при нея разпределянето на стоките и услугите става чрез пазара без пряката намеса на държавата"},
-    {term: "пазарни принципи", definition: "икономически принципи, при които търсенето и предлагането на пазара определят цените на стоките"},
-    {term: "парламентарни избори", definition: "избори за законодателна власт (Народно събрание)"},
-    {term: "партизани", definition: "участници във въоръжената съпротива срещу българските власти, организирана от БКП (1941–1944 г.)"},
-    {term: "партизанщина", definition: "така в края на XIX в. наричат желанието на политическите партии да се обогатяват от властта"},
-    {term: "перестройка", definition: "от руски език; реформите на Михаил Горбачов, целящи укрепване на СССР"},
-    {term: "политическа партия", definition: "организация на хора с общи интереси, цели и идеи за управлението на държавата"},
-    {term: "политическа система", definition: "съвкупност от държавни органи, партии и организации, политически идеи и отношения, при които протича политическият живот на обществото"},
-    {term: "политически плурализъм", definition: "възможност за съществуване на политически партии и организации с различни идеи и възгледи"},
-    {term: "популизъм", definition: "дейност, която цели да осигури популярност с цената на необосновани обещания и лозунги"},
-    {term: "преврат", definition: "насилствена промяна на държавното управление"},
-    {term: "предприемач", definition: "човек, който поема нови инициативи, влага средства и извършва стопанска дейност с цел печалба"},
-    {term: "примирие", definition: "временно спиране на военните действия между участниците във военен конфликт"},
-    {term: "пропаганда", definition: "разпространяване и разясняване на идеи с цел спечелване на обществена подкрепа"},
-    {term: "протекционизъм", definition: "политика за защита и насърчаване на родното производство"},
-    {term: "ревизия", definition: "преразглеждане, промяна на договор по мирен път"},
-    {term: "Регентство", definition: "колективен орган, който замества владетеля при смърт, непълнолетие или невъзможност да изпълнява задълженията си"},
-    {term: "репресии", definition: "насилствени действия срещу политически противници за наказване, сплашване или физическо ликвидиране"},
-    {term: "референдум", definition: "допитване до населението по важен въпрос"},
-    {term: "реформа", definition: "промяна, свързана с въвеждането на нещо ново или по-добро"},
-    {term: "русофили", definition: "привърженици на руската политика спрямо България"},
-    {term: "русофоби", definition: "противници на руската намеса в българското развитие"},
-    {term: "светско образование", definition: "образование, което няма религиозен характер и не се контролира от Църквата"},
-    {term: "семинария", definition: "училище за подготовка на свещеници"},
-    {term: "символизъм", definition: "направление в европейската и руската литература и изкуство от края на XIX и началото на ХХ в.; насочва вниманието към индивидуалните човешки преживявания, към поезията сама за себе си"},
-    {term: "сръбска пропаганда", definition: "стремежът на Сърбия да наложи своя език, образование и църкви в Македония"},
-    {term: "Съвет на Европа", definition: "международна организация на държавите от Европа"},
-    {term: "съдебна власт", definition: "система от съдилища, които налагат справедливост и осигуряват решаване на спорове"},
-{term: "тоталитаризъм", definition: "политическа система, при която властта контролира всички аспекти на обществото и живота на хората"},
-{term: "феодализъм", definition: "система на управление, при която земята е в ръцете на феодали и се обработва от селяни, обвързани с тях"},
-{term: "централизирана власт", definition: "власт, съсредоточена в ръцете на един орган или лице"},
-{term: "чужда намеса", definition: "влияние или вмешателство на чужда държава във вътрешните работи на друга страна"},
-{term: "Шестдесет и деветко", definition: "условно понятие за упражнение на памет и внимание"}
-];
+function searchTerm() {
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const entries = document.querySelectorAll('.entry');
+    let found = false;
 
-let currentConcept = null;
-let correctCount = 0;
-let wrongCount = 0;
+    entries.forEach(entry => {
+        const term = entry.querySelector('.term').textContent.toLowerCase();
+        if (term.includes(query) && query !== "") {
+            entry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            entry.style.boxShadow = "0 0 20px 5px #ff3333";
+            setTimeout(() => entry.style.boxShadow = "none", 2000);
+            found = true;
+        }
+    });
 
-function newConcept() {
-    const index = Math.floor(Math.random() * concepts.length);
-    currentConcept = concepts[index];
-    document.getElementById("concept-display").textContent = currentConcept.definition;
-    document.getElementById("answer-input").value = "";
-    document.getElementById("feedback").textContent = "";
+    const result = document.getElementById('search-result');
+    result.textContent = found ? "" : "Няма намерено понятие.";
 }
 
-function checkAnswer() {
-    const userAnswer = document.getElementById("answer-input").value.trim().toLowerCase();
-    const correctAnswer = currentConcept.term.toLowerCase();
-
-    if (!currentConcept) {
-        document.getElementById("feedback").textContent = "Натиснете 'Лауреат', за да започнете!";
-        return;
+function scrollToLetter(letter) {
+    const entries = document.querySelectorAll('.entry');
+    for (let entry of entries) {
+        const firstLetter = entry.querySelector('.term').textContent.trim().charAt(0).toUpperCase();
+        if (firstLetter === letter) {
+            entry.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            entry.style.boxShadow = "0 0 20px 5px #ff3333";
+            setTimeout(() => entry.style.boxShadow = "none", 1500);
+            break;
+        }
     }
-
-    if (userAnswer === correctAnswer) {
-        document.getElementById("feedback").textContent = "Верен отговор!";
-        document.getElementById("feedback").style.color = "limegreen";
-        correctCount++;
-    } else {
-        document.getElementById("feedback").textContent = `Грешен отговор! Верният е: ${currentConcept.term}`;
-        document.getElementById("feedback").style.color = "red";
-        wrongCount++;
-    }
-
-    document.getElementById("scoreboard").textContent = `Верни: ${correctCount} | Грешни: ${wrongCount}`;
-
-    // Автоматично да се показва ново понятие след кратко време
-    setTimeout(newConcept, 2000);
 }
 </script>
 
 </body>
-</html>
+    </html>
